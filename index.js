@@ -1,12 +1,14 @@
 const mineflayer = require('mineflayer');
+const autoVersion = require('mineflayer-auto-version');
 
 function createBot() {
   const bot = mineflayer.createBot({
     host: 'yassin1000-N2zD.aternos.me',
     port: 12961,
-    username: 'mohamad99',
-    version: false // سيتعرف البوت على إصدار السيرفر تلقائياً
+    username: 'mohamad99'
   });
+
+  autoVersion(bot);
 
   bot.on('spawn', () => {
     console.log('✅ تم دخول البوت للسيرفر بنجاح!');
