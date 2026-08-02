@@ -1,11 +1,14 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /app
 
-# تثبيت البوت رسمياً عبر dotnet (طريقة متوافقة 100% مع أنظمة السحاب)
-RUN dotnet tool install --global MinecraftConsoleClient --version 26.1.0-build.499
+# تنزيل واستخراج النسخة الثابتة مباشرة
+RUN apt-get update && apt-get install -y wget unzip && \
+    wget -O mcc.zip https://github.com/MCCTeam/Minecraft-Console-Client/releases/download/v26.1/MinecraftClient-26.1-linux-x64.zip && \
+    unzip -o mcc.zip && \
+    chmod +x MinecraftClient
 
 COPY MinecraftClient.ini .
 
-# أمر التشغيل المباشر من مسار الأدوات
-ENTRYPOINT ["/root/.dotnet/tools/MinecraftConsoleClient"]
+# أمر التشغيل المباشر
+CMD ["/app/MinecraftClient"]
