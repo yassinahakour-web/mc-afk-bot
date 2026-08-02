@@ -1,15 +1,9 @@
-FROM mcr.microsoft.com/dotnet/runtime:8.0
+FROM node:18-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y curl unzip jq
+RUN npm install mineflayer
 
-# جلب رابط أحدث ملف linux-x64.zip تلقائياً وتنزيله
-RUN DOWNLOAD_URL=$(curl -s https://api.github.com/repos/MCCTeam/Minecraft-Console-Client/releases/latest | jq -r '.assets[] | select(.name | contains("linux-x64.zip")) | .browser_download_url') && \
-    curl -L -o mcc.zip "$DOWNLOAD_URL" && \
-    unzip -o mcc.zip && \
-    chmod +x MinecraftClient
+COPY index.js .
 
-COPY MinecraftClient.ini .
-
-CMD ["./MinecraftClient"]
+CMD ["node", "index.js"]
