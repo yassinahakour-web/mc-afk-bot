@@ -1,11 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y wget unzip jq
+RUN apt-get update && apt-get install -y wget unzip
 
-# جلب أحدث إصدار تلقائياً وبدون الوقع في خطأ 404
-RUN DOWNLOAD_URL=$(wget -qO- https://api.github.com/repos/MCCTeam/Minecraft-Console-Client/releases/latest | jq -r '.assets[] | select(.name | contains("linux-x64.zip")) | .browser_download_url') && \
-    wget -O mcc.zip "$DOWNLOAD_URL" && \
+# تحميل النسخة المباشرة الموثوقة بدون أوامر معقدة
+RUN wget -O mcc.zip https://github.com/MCCTeam/Minecraft-Console-Client/releases/download/v26.1/MinecraftClient-26.1-linux-x64.zip && \
     unzip mcc.zip && \
     chmod +x MinecraftClient
 
