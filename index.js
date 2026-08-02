@@ -5,7 +5,7 @@ function createBot() {
     host: 'yassin1000-N2zD.aternos.me',
     port: 12961,
     username: 'mohamad98',
-    version: '1.21.1'
+    version: '1.21.11'
   });
 
   bot.on('spawn', () => {
