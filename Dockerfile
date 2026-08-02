@@ -2,7 +2,7 @@ FROM node:18-slim
 
 WORKDIR /app
 
-RUN npm install mineflayer mineflayer-auto-version
+RUN npm install mineflayer
 
 COPY index.js .
 
