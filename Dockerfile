@@ -1,14 +1,15 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/runtime:8.0
 
 WORKDIR /app
 
-# تنزيل واستخراج النسخة الثابتة مباشرة
-RUN apt-get update && apt-get install -y wget unzip && \
-    wget -O mcc.zip https://github.com/MCCTeam/Minecraft-Console-Client/releases/download/v26.1/MinecraftClient-26.1-linux-x64.zip && \
+RUN apt-get update && apt-get install -y curl unzip jq
+
+# جلب رابط أحدث ملف linux-x64.zip تلقائياً وتنزيله
+RUN DOWNLOAD_URL=$(curl -s https://api.github.com/repos/MCCTeam/Minecraft-Console-Client/releases/latest | jq -r '.assets[] | select(.name | contains("linux-x64.zip")) | .browser_download_url') && \
+    curl -L -o mcc.zip "$DOWNLOAD_URL" && \
     unzip -o mcc.zip && \
     chmod +x MinecraftClient
 
 COPY MinecraftClient.ini .
 
-# أمر التشغيل المباشر
-CMD ["/app/MinecraftClient"]
+CMD ["./MinecraftClient"]
