@@ -1,14 +1,16 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0
+FROM mcr.microsoft.com/dotnet/runtime:8.0
 
 WORKDIR /app
 
-# تثبيت أداة MCC
-RUN dotnet tool install --global MinecraftConsoleClient --version 26.1.0-build.499 || true
+RUN apt-get update && apt-get install -y wget unzip
 
-# إضافة مسار الأدوات للنظام
-ENV PATH="${PATH}:/root/.dotnet/tools"
+# تحميل النسخة الجاهزة واستخراجها في مجلد العمل مباشرة
+RUN wget -O mcc.zip https://github.com/MCCTeam/Minecraft-Console-Client/releases/download/v26.2/MinecraftClient-20260731-499-linux-x64.zip || \
+    wget -O mcc.zip https://github.com/MCCTeam/Minecraft-Console-Client/releases/download/v26.1/MinecraftClient-26.1-linux-x64.zip
+
+RUN unzip -o mcc.zip && chmod +x MinecraftClient
 
 COPY MinecraftClient.ini .
 
-# تشغيل الأداة باسمها الصحيح مباشرة
-CMD ["MinecraftConsoleClient"]
+# تشغيل الملف التنفيذي المباشر
+CMD ["./MinecraftClient"]
