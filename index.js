@@ -3,21 +3,22 @@ const mineflayer = require('mineflayer');
 function createBot() {
   const bot = mineflayer.createBot({
     host: 'yassin1000-N2zD.aternos.me',
+    port: 12961,
     username: 'mohamad99',
-    version: false
+    version: false // سيتعرف البوت على إصدار السيرفر تلقائياً
   });
 
   bot.on('spawn', () => {
     console.log('✅ تم دخول البوت للسيرفر بنجاح!');
   });
 
-  bot.on('end', () => {
-    console.log('⚠️ تم فصل البوت، إعادة الاتصال بعد 10 ثوانٍ...');
-    setTimeout(createBot, 10000);
+  bot.on('end', (reason) => {
+    console.log(`⚠️ تم الانفصال بسبب: ${reason} - إعادة الاتصال بعد 15 ثانية...`);
+    setTimeout(createBot, 15000);
   });
 
   bot.on('error', (err) => {
-    console.log('❌ خطأ:', err.message);
+    console.log('❌ خطأ في الاتصال:', err.message);
   });
 }
 
