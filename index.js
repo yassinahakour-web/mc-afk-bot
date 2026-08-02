@@ -4,8 +4,8 @@ function createBot() {
   const bot = mineflayer.createBot({
     host: 'yassin1000-nTZP.aternos.me',
     port: 39018,
-    username: 'hamza55',
-    version: '1.20.4',
+    username: 'hamza99',
+    version: '1.21.4', // تعديل رقم الإصدار لـ 1.21.4
     checkTimeoutInterval: 60 * 1000
   });
 
