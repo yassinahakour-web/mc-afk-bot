@@ -4,7 +4,7 @@ function createBot() {
   const bot = mineflayer.createBot({
     host: 'yassin1000-nTZP.aternos.me',
     port: 39018,
-    username: 'mohamad94',
+    username: 'hamza55',
     version: '1.20.4',
     checkTimeoutInterval: 60 * 1000
   });
@@ -14,7 +14,7 @@ function createBot() {
   });
 
   bot.on('end', (reason) => {
-    console.log(`⚠️ تم الانفصال بسبب: ${reason} - إعادة الاتصال بعد 15 ثانية...`);
+    console.log(`⚠️ تم الانفصال: ${reason} - إعادة الاتصال بعد 15 ثانية...`);
     setTimeout(createBot, 15000);
   });
 
