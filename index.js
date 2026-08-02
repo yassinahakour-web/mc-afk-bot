@@ -2,9 +2,9 @@ const mineflayer = require('mineflayer');
 
 function createBot() {
   const bot = mineflayer.createBot({
-    host: 'yassin1000-N2zD.aternos.me',
-    port: 12961,
-    username: 'mohamad89',
+    host: 'yassin1000-nTZP.aternos.me',
+    port: 39018,
+    username: 'mohamad94',
     version: '1.20.4',
     checkTimeoutInterval: 60 * 1000
   });
