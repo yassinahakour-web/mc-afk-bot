@@ -2,7 +2,7 @@ const mineflayer = require('mineflayer');
 
 function createBot() {
   const bot = mineflayer.createBot({
-    host: 'yassin1000-nTZP.aternos.me',
+    host: 'SMP_Family.aternos.me',
     port: 39018,
     username: 'hamza99',
     version: '1.21.4', // تعديل رقم الإصدار لـ 1.21.4
